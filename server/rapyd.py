@@ -8,7 +8,7 @@ import time
 import os
 import requests
 
-from .util import require_env
+from util import require_env
 
 base_url = os.getenv('RAPYD_URL', 'https://sandboxapi.rapyd.net')
 access_key = require_env("RAPYD_ACCESS_KEY")
