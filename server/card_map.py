@@ -5,3 +5,8 @@
 CARD_MAP = {
 
 }
+
+
+def get_best_card(category):
+    # TODO: returns the best card(s) to use based on the provided category
+    return None
