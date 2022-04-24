@@ -4,8 +4,8 @@ import { BASE_URL } from '../util/constants'
 const axiosInstance = axios.create({baseURL: BASE_URL})
 
 
-export const createPaymentSubscription = () => {
-
+export const getBestCard = (body) => {
+    return axiosInstance.post('/recommend', body)
 }
 
 export const createWallet = () => {

@@ -5,19 +5,17 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from rapyd import make_request
 from tinydb import TinyDB, Query
+
+from card_map import get_best_card
 db = TinyDB('./db.json')
 
 user_table = db.table('user')
 # card_table = db.table('cards')
 
 app = FastAPI()
-origins = [
-    "http://localhost:3000",
-    "http://localhost:8080",
-]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -72,6 +70,17 @@ def post_customer(data: dict):
     if user:
         return user
 
+    # https://docs.rapyd.net/build-with-rapyd/reference/wallet-object#create-wallet
+    # TODO: create new wallet.
+    data = {
+        **data,
+        "ewallet": "ewallet_ebfe4c4f4d36b076a21369fb0d055f3e",
+        "invoice_prefix": "JD-",
+        "metadata": {
+            "merchant_defined": True
+        },
+    }
+    print('post', data)
     result = make_request(method="post",
                        path="/v1/customers",
                        body=data)
@@ -96,3 +105,20 @@ def recommend_payment_method(data: dict):
     user = _find_customer(data['email'])
     if not user:
         return Exception('Not found')
+
+    return get_best_card(data['category'], [])
+
+@app.get("/save-card")
+def save_card_page(data: dict):
+    user = _find_customer(data['email'])
+    if not user:
+        return Exception('Not found')
+
+    body = {
+        'customer': user['id'],
+        'country': 'US'
+    }
+    results = make_request(method="post",
+                    path="/v1/hosted/collect/card",
+                    body=body)
+    return results

@@ -14,6 +14,13 @@
   background: white;
 }
 
+.standard-input {
+  max-width: 400px;
+  clear: both;
+  margin-top: 5px;
+  margin-right: 5px;
+}
+
 .container {
   max-width: 1000px;
   margin: 0 auto;

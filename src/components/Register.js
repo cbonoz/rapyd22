@@ -9,6 +9,7 @@ import { postCustomer } from "../api";
 
 function Register(props) {
   const [email ,setEmail] = useState()
+  const [name ,setName] = useState()
   const [ready, setReady] = useState(false)
   const [user, setUser] = useState()
   const [loading, setLoading] = useState(false)
@@ -16,7 +17,7 @@ function Register(props) {
   const postUser = async () => {
     console.log('fetchUser', email)
     try {
-      const u = await postCustomer({email})
+      const u = await postCustomer({email, name})
       console.log('set', u)
       setUser(u)
     } catch (e) {
@@ -29,14 +30,39 @@ function Register(props) {
       postUser()
     }
   }, [ready])
+
+  useEffect(() => {
+    if (user) {
+      window.addEventListener('onSaveCardDetailsSuccess', (event) => {
+        console.log(event.detail)
+        // Returns ‘Payment’ object.
+        // Client code.
+      })
+      window.addEventListener('onSaveCardDetailsFailure', (event) => {
+        console.error(event.detail.error)
+        // Returns an error message from the API.
+        // Client code.
+      })
+
+      window.addEventListener('onLoading', (event) => {
+        console.log(event.detail.loading)
+          // Returns true or false depending on the loading state
+          // Client code.
+        })
+      }
+      // TODO: remove listener on exit.
+  }, [user])
   
 
   if (!email || !ready) {
     return <>
     <h1>Register cards</h1>
-    <p>Enter your email to begin</p>
-    <Input value={email} onChange={e => setEmail(e.target.value)}></Input>
+    <p>Enter your name and email to begin:</p>
+    <Input className='standard-input' prefix="Full name: " value={name} onChange={e => setName(e.target.value)}></Input>
     <br/>
+    <Input className='standard-input' prefix="Email: " value={email} onChange={e => setEmail(e.target.value)}></Input>
+    <br/>
+ 
 
     <Button onClick={() => setReady(true)} type="primary" className="standard-btn">
       Ready
@@ -46,8 +72,9 @@ function Register(props) {
 
   return (
     <>
-    <h1>Register cards</h1>
-
+    <h1>Add card</h1>
+    {user && <span>{JSON.stringify(user)}</span>}
+    <div id="rapyd-toolkit"></div>
     </>
   );
 }

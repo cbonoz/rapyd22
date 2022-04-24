@@ -1,18 +1,19 @@
+import React, {useState} from 'react'
 import { Layout, Menu } from "antd";
 import { APP_NAME } from "./util/constants";
-
 import { Routes, Route, Link, Router } from "react-router-dom";
-
-import logo from "./assets/logo.png";
-import "antd/dist/antd.min.css";
-import "./App.css";
 import About from "./components/About";
 import Register from "./components/Register";
 import BestCard from "./components/BestCard";
 
+import logo from "./assets/logo.png";
+import "antd/dist/antd.min.css";
+import "./App.css";
+
 const { Header, Footer, Sider, Content } = Layout;
 
 function App() {
+  const [user, setUser] = useState()
   return (
     <div className="App">
       <Layout>

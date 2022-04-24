@@ -13,6 +13,7 @@ from util import require_env
 base_url = os.getenv('RAPYD_URL', 'https://sandboxapi.rapyd.net')
 access_key = require_env("RAPYD_ACCESS_KEY")
 secret_key = require_env("RAPYD_SECRET")
+print('rapyd', access_key, secret_key)
 
 def generate_salt(length=12):
     return ''.join(random.sample(string.ascii_letters + string.digits, length))
@@ -62,5 +63,5 @@ def make_request(method,path,body=''):
         response = requests.post(base_url + path, data=body, headers=headers)
 
     if response.status_code != 200:
-        raise TypeError(response, method,base_url + path)
+        raise TypeError(response.json(), method,base_url + path)
     return json.loads(response.content)
