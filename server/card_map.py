@@ -19,4 +19,4 @@ if __name__ == '__main__':
 
     # test case 1 example
     best_card = get_best_card("restaurants", ['usa_mastercard', 'usa_chase', 'usa_amex'])
-    print(best_card)
+    print('card', best_card)
