@@ -2,34 +2,33 @@ import React, {useState, useEffect} from "react";
 import { APP_DESC, APP_NAME } from "../util/constants";
 import logo from "../assets/logo.png";
 import { useNavigate } from "react-router-dom";
-import { Button } from "antd";
+import { Button, Select, Spin } from "antd";
 import Input from "antd/lib/input/Input";
-import userEvent from "@testing-library/user-event";
 import { postCustomer } from "../api";
 
-function Register(props) {
+const { Option } = Select;
+
+function Register({setUser, user}) {
   const [email ,setEmail] = useState()
+  const [allCards, setAllCards] = useState()
+  const [error, setError] = useState()
   const [name ,setName] = useState()
-  const [ready, setReady] = useState(false)
-  const [user, setUser] = useState()
   const [loading, setLoading] = useState(false)
 
   const postUser = async () => {
+    setError('')
     console.log('fetchUser', email)
     try {
-      const u = await postCustomer({email, name})
+      const response = await postCustomer({email, name})
+      const u = response.data
       console.log('set', u)
       setUser(u)
     } catch (e) {
-      console.error('e', e)
+      const err =  e.response.data.detail
+      console.error('e', err)
+      setError(err)
     }
   }
-
-  useEffect(() => {
-    if(ready) {
-      postUser()
-    }
-  }, [ready])
 
   useEffect(() => {
     if (user) {
@@ -54,27 +53,44 @@ function Register(props) {
   }, [user])
   
 
-  if (!email || !ready) {
+  if (!email || !user) {
     return <>
     <h1>Register cards</h1>
-    <p>Enter your name and email to begin:</p>
-    <Input className='standard-input' prefix="Full name: " value={name} onChange={e => setName(e.target.value)}></Input>
-    <br/>
+    <p>Enter your email to begin:</p>
+    {/* <Input className='standard-input' prefix="Full name: " value={name} onChange={e => setName(e.target.value)}></Input>
+    <br/> */}
     <Input className='standard-input' prefix="Email: " value={email} onChange={e => setEmail(e.target.value)}></Input>
     <br/>
- 
 
-    <Button onClick={() => setReady(true)} type="primary" className="standard-btn">
+    <Button onClick={postUser} type="primary" className="standard-btn">
       Ready
     </Button>
+    {error && <p className="error-text">{error}</p>}
     </>
+  }
+
+  if (!allCards) {
+    return <Spin/>
   }
 
   return (
     <>
-    <h1>Add card</h1>
-    {user && <span>{JSON.stringify(user)}</span>}
-    <div id="rapyd-toolkit"></div>
+    <h1>Found cards</h1>
+    <Select
+      mode="multiple"
+      allowClear
+      style={{ width: '100%' }}
+      placeholder="Please select"
+      defaultValue={[]}
+      onChange={() => {}}
+    >
+      {allCards.map(c => {
+        return <Option key={c.name}>{c.name}</Option>
+      })}
+    </Select>
+    <Button onClick={() => {}}>Save</Button>
+    {/* {user && <span>{JSON.stringify(user)}</span>} */}
+    {/* <div id="rapyd-toolkit"></div> */}
     </>
   );
 }

@@ -11,7 +11,7 @@ function About(props) {
       <img src={logo} className="about-image" />
       <h3>{APP_DESC}</h3>
       <br/>
-      <Button type="primary" size="large" onClick={() => navigate('/register')}>Add cards</Button>
+      <Button type="primary" size="large" onClick={() => navigate('/register')}>Login</Button>
     </div>
   );
 }

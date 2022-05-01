@@ -9,6 +9,8 @@ import BestCard from "./components/BestCard";
 import logo from "./assets/logo.png";
 import "antd/dist/antd.min.css";
 import "./App.css";
+import Docs from './components/Docs';
+import Checkout from './components/Checkout';
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -24,23 +26,28 @@ function App() {
                 <img src={logo} className="header-image" />
               </Menu.Item>
             </Link>
-            <Link to="/">
-              <Menu.Item key="1">Home</Menu.Item>
+            {!user && <Link to="/">
+              <Menu.Item key="1">Get Started</Menu.Item>
+            </Link>}
+            {/* <Link to="/register">
+              <Menu.Item key="2">Register</Menu.Item>
+            </Link> */}
+            <Link to="/checkout">
+              <Menu.Item key="3">Smart Checkout</Menu.Item>
             </Link>
-            <Link to="/register">
-              <Menu.Item key="2">Register card</Menu.Item>
+            <Link to="/api">
+              <Menu.Item key="3">API</Menu.Item>
             </Link>
-            <Link to="/about">
-              <Menu.Item key="3">Smart Payments</Menu.Item>
-            </Link>
+            {user && <span>Active: {user.email}</span>}
           </Menu>
         </Header>
         <Content>
           <div className="container">
             <Routes>
               <Route exact path="/" element={<About/>}/>
-              <Route exact path="/register" element={<Register />} />
-              <Route exact path="/match" element={<BestCard />} />
+              <Route exact path="/register" element={<Register setUser={setUser} user={user}/>} />
+              <Route exact path="/checkout" element={<Checkout />} />
+              <Route exact path="/api" element={<Docs />} />
             </Routes>
           </div>
         </Content>

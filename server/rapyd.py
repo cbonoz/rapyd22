@@ -1,3 +1,4 @@
+from fastapi import HTTPException
 import json
 import random
 import string
@@ -8,7 +9,7 @@ import time
 import os
 import requests
 
-from util import require_env
+from helpers import require_env
 
 base_url = os.getenv('RAPYD_URL', 'https://sandboxapi.rapyd.net')
 access_key = require_env("RAPYD_ACCESS_KEY")
@@ -63,5 +64,8 @@ def make_request(method,path,body=''):
         response = requests.post(base_url + path, data=body, headers=headers)
 
     if response.status_code != 200:
-        raise TypeError(response.json(), method,base_url + path)
+        print(response.content)
+        data = response.json()
+        message = data['status']['message']
+        raise HTTPException(status_code=response.status_code, detail=message)
     return json.loads(response.content)

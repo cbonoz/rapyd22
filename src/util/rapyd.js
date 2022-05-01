@@ -1,6 +1,6 @@
 
 export const renderSaveCardPage = (cardPageId) => {
-    let toolkit = new RapydToolkit({    
+    let toolkit = new window.RapydToolkit({    
         button_text: "Save",
                /* Text that appears on the Save button. 
                   String. Maximum length is 16 characters.
@@ -45,5 +45,29 @@ export const renderSaveCardPage = (cardPageId) => {
         }
      });
      toolkit.displayToolkit();
+
+}
+
+// https://docs.rapyd.net/build-with-rapyd/docs/hosted-checkout-page-integration-steps
+export const renderCheckoutPage = (checkoutId) => {
+    let checkout = new window.RapydCheckoutToolkit({
+        pay_button_text: "Buy now",
+              // Text that appears on the 'Pay' button. 
+              // String. Maximum length is 16 characters.
+              // Default is "Place Your Order". Optional. 
+        pay_button_color: "blue",
+              // Color of the 'Pay' button. String.
+              // Standard CSS color name or hexadecimal code such as #323fff.
+              // Default is the color that is returned in the 'merchant_color'
+              // field of the response to 'Create Checkout Page'. Optional.
+        id: checkoutId || "checkout_9ebe58dcb9d75e8f972a35350f96c2fa",
+              // ID of the 'Create Checkout Page' response. String. Required.
+        close_on_complete: true,
+              // Causes the embedded Rapyd Checkout Toolkit window to close
+              // when the payment is complete. Boolean. Default is 'true'. Optional.           
+        page_type: "collection"
+             // Default is "collection". Optional.
+    });
+    checkout.displayCheckout();
 
 }

@@ -8,7 +8,16 @@ export const getBestCard = (body) => {
     return axiosInstance.post('/recommend', body)
 }
 
-export const createWallet = () => {
+export const getCards = (body) => {
+    return axiosInstance.get('/cards')
+}
+
+export const getCategories = (body) => {
+    return axiosInstance.get('/categories')
+}
+
+export const postCheckout = (body) => {
+    return axiosInstance.post('/checkout', body)
 
 }
 

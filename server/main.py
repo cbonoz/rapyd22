@@ -1,12 +1,15 @@
+from string import capwords
 from typing import Optional
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
 
+from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from tinydb import Query, TinyDB
 
 from rapyd import make_request
-from tinydb import TinyDB, Query
+from card_map import get_cards, get_categories, get_best_cards
+from helpers import check_keys_in_object, create_wallet_payload, create_checkout_payload
 
-from card_map import get_best_card
+NOT_FOUND = HTTPException(status_code=404)
 db = TinyDB('./db.json')
 
 user_table = db.table('user')
@@ -24,6 +27,14 @@ app.add_middleware(
 @app.get("/")
 def read_root():
     return {"Hello": "World"}
+
+@app.get("/cards")
+def cards():
+    return get_cards()
+
+@app.get("/categories")
+def categories():
+    return get_categories()
 
 # https://github.com/msiemens/tinydb#example-code
 def _find_customer(email):
@@ -48,9 +59,10 @@ def _find_customer(email):
 # }
 @app.post("/checkout")
 def post_checkout(data: dict):
+    body = create_checkout_payload()
     results = make_request(method="post",
                        path="/v1/checkout",
-                       body=data)
+                       body=body)
     return results
 
 # {
@@ -66,53 +78,68 @@ def post_checkout(data: dict):
 # }
 @app.post("/customer")
 def post_customer(data: dict):
-    user = _find_customer(data['email'])
+    check_keys_in_object(['email', 'name'], data)
+    email = data['email']
+    user = _find_customer(email)
     if user:
         return user
 
     # https://docs.rapyd.net/build-with-rapyd/reference/wallet-object#create-wallet
     # TODO: create new wallet.
+    tokens = data['name'].split()
+    if len(tokens) != 2:
+        raise HTTPException(status_code=400, detail="Need first and last name")
+
+    first_name, last_name = tokens
+    data = create_wallet_payload(first_name, last_name, email)
+    result = make_request(method="post",
+                       path="/v1/user",
+                       body=data)
+
+    wallet_id = result['data']['id']
+    print('created wallet', wallet_id)
+
     data = {
         **data,
-        "ewallet": "ewallet_ebfe4c4f4d36b076a21369fb0d055f3e",
+        "email": email,
+        "ewallet": wallet_id,
         "invoice_prefix": "JD-",
         "metadata": {
             "merchant_defined": True
         },
     }
-    print('post', data)
     result = make_request(method="post",
-                       path="/v1/customers",
-                       body=data)
-    if result['status'] != 'SUCCESS':
-        return result['status']
+                    path="/v1/customers",
+                    body=data)
 
-    user_table.insert(result['data'])
-    return result
+    print('customer', result)
+    user_table.insert(data)
+    return data
 
 @app.get("/customer")
 def get_customer_by_email(data: dict):
     user = _find_customer(data['email'])
     if not user:
-        return Exception('Not found')
+        raise NOT_FOUND
 
     results = make_request(method="get",
                        path="/v1/customers/" + user['id'])
     return results
 
-@app.get("/recommend")
+@app.post("/recommend")
 def recommend_payment_method(data: dict):
-    user = _find_customer(data['email'])
-    if not user:
-        return Exception('Not found')
+    if 'email' in data:
+        user = _find_customer(data['email'])
+        if not user:
+            raise NOT_FOUND
 
-    return get_best_card(data['category'], [])
+    return get_best_cards(data['category'], 1000)
 
 @app.get("/save-card")
 def save_card_page(data: dict):
     user = _find_customer(data['email'])
     if not user:
-        return Exception('Not found')
+        return 
 
     body = {
         'customer': user['id'],

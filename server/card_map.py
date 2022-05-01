@@ -1,5 +1,6 @@
 
 import json
+import itertools
 
 # map of card name to best categories.
 # usa_mastercard: ['gas', 'clothes', ...]
@@ -302,12 +303,33 @@ CARD_MAP = {
 	]
 }
 
+def _get_best_percentage(category, card):
+    rewards = card.get('rewards', {})
+    matching_reward = rewards.get(category, rewards.get('all', {}))
+    return matching_reward.get('percentage', 0)
 
-def get_best_card(category, amount, supported_cards):
-    # TODO: returns the best card(s) to use based on the provided category
-    # supported cards is a restricted list of cards based on the current user.
 
-    return None
+def get_cards():
+    return [card['name'] for card in CARD_MAP['cards']]
+
+def get_categories():
+    all_rewards = [card['rewards'] for card in CARD_MAP['cards']]
+    categories = itertools.chain(*[list(rewards.keys()) for rewards in all_rewards])
+    return set(categories)
+
+
+def get_best_cards(category, amount=None, supported_cards=None, limit=3):
+    # category: Active category of purchase
+    # amount: reward limit on card
+    # supported_cards: restricted list of cards based on the current user.
+    cards = CARD_MAP['cards']
+    if supported_cards:
+        cards = [c for c in cards if cards['name'] in supported_cards]
+
+    # Sort the best card(s) to use based on the provided category.
+    sorted_cards = sorted(cards, key=lambda c: _get_best_percentage(category, c), reverse=True)
+
+    return sorted_cards[:limit]
 
 
 

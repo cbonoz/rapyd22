@@ -14,6 +14,15 @@
   background: white;
 }
 
+.left {
+  text-align: left;
+}
+
+.code-block {
+  background: #eee;
+  padding: 20px;
+}
+
 .standard-input {
   max-width: 400px;
   clear: both;
@@ -84,6 +93,24 @@
 
 .payment-form input {
   margin: 5px;
+}
+
+.boxed {
+  border: 1px solid lightgray;
+  padding: 10px;
+  min-height: 40vh !important;
+}
+
+.card-icon {
+  margin-top:20px;
+  margin-bottom: 10px;
+  width: 100px;
+}
+
+.width-100 {
+}
+.width-150 {
+  width: 150px;
 }
 
 .error-text {
