@@ -9,6 +9,7 @@ import { getCards, postCustomer } from "../api";
 const { Option } = Select;
 
 function Register({setUser, user}) {
+  const navigate = useNavigate()
   const [email ,setEmail] = useState()
   const [allCards, setAllCards] = useState()
   const [error, setError] = useState()
@@ -105,6 +106,10 @@ function Register({setUser, user}) {
     <br/>
     <br/>
     <Button type={'primary'} onClick={() => {}}>Save</Button>
+    &nbsp;
+    <Button type={'secondary'} onClick={() => navigate('/checkout')}>Go to checkout</Button>
+
+
     {/* {user && <span>{JSON.stringify(user)}</span>} */}
     {/* <div id="rapyd-toolkit"></div> */}
     </>

@@ -42,7 +42,7 @@ function BestCard({user, category}) {
     <div className="container">
       {/* <Button loading={loading} disabled={loading} type="primary" onClick={recommend}>Recommend Card</Button> */}
       {/* {result && <span>{JSON.stringify(result)}</span>} */}
-      {result && <div><h3>Your best cards:</h3>{result.map((c, i) => {
+      {result && <div><h3 className="green">Your best cards:</h3>{result.map((c, i) => {
         return <div key={i}>
           <img src={c.image} className="card-icon width-100"/>
           <div>
