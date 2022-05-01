@@ -69,14 +69,14 @@ function Register({setUser, user}) {
   if (!email || !user) {
     return <>
     <h1>Register cards</h1>
-    <p>Enter your email to begin:</p>
+    <p>Enter your name and email to begin:</p>
     <Input className='standard-input' prefix="Full name: " value={name} onChange={e => setName(e.target.value)}></Input>
     <br/>
     <Input className='standard-input' prefix="Email: " value={email} onChange={e => setEmail(e.target.value)}></Input>
     <br/>
 
     <Button onClick={postUser} type="primary" className="standard-btn">
-      Ready
+      Continue
     </Button>
     {error && <p className="error-text">{error}</p>}
     </>
