@@ -126,7 +126,7 @@ def get_customer_by_email(data: dict):
                        path="/v1/customers/" + user['id'])
     return results
 
-@app.post("/recommend")
+@app.post("/cards/recommend")
 def recommend_payment_method(data: dict):
     if 'email' in data:
         user = _find_customer(data['email'])

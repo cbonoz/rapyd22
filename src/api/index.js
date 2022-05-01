@@ -5,7 +5,7 @@ const axiosInstance = axios.create({baseURL: BASE_URL})
 
 
 export const getBestCard = (body) => {
-    return axiosInstance.post('/recommend', body)
+    return axiosInstance.post('/cards/recommend', body)
 }
 
 export const getCards = (body) => {

@@ -18,7 +18,7 @@ function Docs(props) {
       <ApiDoc
         title={"Get recommended card"}
         description={"Returns a recommended card based on the user's provided cards and the category of purchase."}
-        route={`${BASE_URL}/recommend`}
+        route={`${BASE_URL}/cards/recommend`}
         request={`{
           "category": str, // category of the given purchase.
           "customer": str // email or customer id of the customer.
