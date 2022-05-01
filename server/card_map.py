@@ -337,5 +337,5 @@ def get_best_cards(category, amount=None, supported_cards=None, limit=3):
 if __name__ == '__main__':
 
     # test case 1 example
-    best_card = get_best_card("restaurant", ['usa_mastercard', 'usa_chase', 'usa_amex'])
-    print('card', best_card)
+    best_cards = get_best_cards("restaurant", ['usa_mastercard', 'usa_chase', 'usa_amex'])
+    print('card', best_cards)
