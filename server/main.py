@@ -133,7 +133,7 @@ def recommend_payment_method(data: dict):
         if not user:
             raise NOT_FOUND
 
-    return get_best_cards(data['category'], 1000)
+    return get_best_cards(data['category'], 1000, data.get('cards', None))
 
 @app.get("/save-card")
 def save_card_page(data: dict):

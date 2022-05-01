@@ -4,7 +4,7 @@ import logo from "../assets/logo.png";
 import { useNavigate } from "react-router-dom";
 import { Button, Select, Spin } from "antd";
 import Input from "antd/lib/input/Input";
-import { postCustomer } from "../api";
+import { getCards, postCustomer } from "../api";
 
 const { Option } = Select;
 
@@ -30,6 +30,15 @@ function Register({setUser, user}) {
     }
   }
 
+  async function getAllCards() {
+    try {
+      const {data} = await getCards()
+      setAllCards(data)
+    } catch (e) {
+      console.error(e)
+    }
+  }
+
   useEffect(() => {
     if (user) {
       window.addEventListener('onSaveCardDetailsSuccess', (event) => {
@@ -48,7 +57,11 @@ function Register({setUser, user}) {
           // Returns true or false depending on the loading state
           // Client code.
         })
+
+        getAllCards()
       }
+
+     
       // TODO: remove listener on exit.
   }, [user])
   
@@ -57,8 +70,8 @@ function Register({setUser, user}) {
     return <>
     <h1>Register cards</h1>
     <p>Enter your email to begin:</p>
-    {/* <Input className='standard-input' prefix="Full name: " value={name} onChange={e => setName(e.target.value)}></Input>
-    <br/> */}
+    <Input className='standard-input' prefix="Full name: " value={name} onChange={e => setName(e.target.value)}></Input>
+    <br/>
     <Input className='standard-input' prefix="Email: " value={email} onChange={e => setEmail(e.target.value)}></Input>
     <br/>
 
@@ -76,19 +89,22 @@ function Register({setUser, user}) {
   return (
     <>
     <h1>Found cards</h1>
+    <p>Select the cards you would like to filter on with {APP_NAME}. If no cards are selected, all available cards will be used.</p>
     <Select
       mode="multiple"
       allowClear
-      style={{ width: '100%' }}
+      style={{ width: '400px' }}
       placeholder="Please select"
       defaultValue={[]}
       onChange={() => {}}
     >
       {allCards.map(c => {
-        return <Option key={c.name}>{c.name}</Option>
+        return <Option key={c}>{c}</Option>
       })}
     </Select>
-    <Button onClick={() => {}}>Save</Button>
+    <br/>
+    <br/>
+    <Button type={'primary'} onClick={() => {}}>Save</Button>
     {/* {user && <span>{JSON.stringify(user)}</span>} */}
     {/* <div id="rapyd-toolkit"></div> */}
     </>

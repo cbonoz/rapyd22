@@ -38,7 +38,7 @@ function App() {
             <Link to="/api">
               <Menu.Item key="3">API</Menu.Item>
             </Link>
-            {user && <span>Active: {user.email}</span>}
+            {user && <span>Active: {user.email}&nbsp;<a onClick={() => setUser(undefined)}>Logout</a></span>}
           </Menu>
         </Header>
         <Content>

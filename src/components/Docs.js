@@ -1,5 +1,5 @@
 import React from "react";
-import { APP_DESC, APP_NAME, BASE_URL } from "../util/constants";
+import { APP_DESC, APP_NAME, BASE_URL, EXAMPLE_RECOMMENDED_CARDS } from "../util/constants";
 import logo from "../assets/logo.png";
 import { useNavigate } from "react-router-dom";
 import { Button } from "antd";
@@ -21,13 +21,10 @@ function Docs(props) {
         route={`${BASE_URL}/cards/recommend`}
         request={`{
           "category": str, // category of the given purchase.
-          "customer": str // email or customer id of the customer.
+          "cards": Optional[str] // list of supported cards. If blank, all available cards will be used.
 }`
         }
-        response={`{
-
-
-}`}
+        response={EXAMPLE_RECOMMENDED_CARDS}
         />
     </div>
   );
