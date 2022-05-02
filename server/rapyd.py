@@ -64,7 +64,7 @@ def make_request(method,path,body=''):
         response = requests.post(base_url + path, data=body, headers=headers)
 
     if response.status_code != 200:
-        print(response.content)
+        print('response', response.content)
         data = response.json()
         message = data['status']['message']
         raise HTTPException(status_code=response.status_code, detail=message)

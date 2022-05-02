@@ -55,7 +55,7 @@ function BestCard({user, category}) {
     <div className="container">
       {/* <Button loading={loading} disabled={loading} type="primary" onClick={recommend}>Recommend Card</Button> */}
       {/* {result && <span>{JSON.stringify(result)}</span>} */}
-      <div><h3 className="green">{useAll ? 'All' : 'Your best'} cards:</h3>
+      <div><h3 className="green">{(useAll || !user) ? 'All' : 'Your best'} cards:</h3>
 
       {result.map((c, i) => {
         return <div key={i}>
@@ -71,7 +71,7 @@ function BestCard({user, category}) {
           </div>
       })}
         <br/>
-      <div>Show all cards <Switch defaultChecked={useAll} onChange={(c) => setUseAll(c)} value={useAll}></Switch></div>
+        {user && <div>Show all cards <Switch defaultChecked={useAll} onChange={(c) => setUseAll(c)} checked={useAll}></Switch></div>}
         <br/>
 
       <img src={powered} style={{width: '125px'}}

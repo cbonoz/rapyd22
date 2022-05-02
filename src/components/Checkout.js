@@ -85,7 +85,7 @@ function Checkout({user}) {
     }
   >
       {categories.map(c => {
-          return <Option value={c}>{c}</Option>
+          return <Option key={c} value={c}>{c}</Option>
       })}
   </Select>
 
@@ -93,7 +93,7 @@ function Checkout({user}) {
 
 </Col>
 <Col span={8} className='boxed'>
-        <BestCard user={user} category={category}/>
+    <BestCard user={user} category={category}/>
 </Col>
 
     </Row>
