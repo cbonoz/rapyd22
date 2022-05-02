@@ -26,10 +26,10 @@ def create_checkout_payload():
         "country": "US",
         "currency": "USD",
         "requested_currency": "USD",
-        # "payment_method_types_include": [
-        #     "sg_credit_mastercard_card", 
-        #     "sg_credit_visa_card"
-        # ]
+        "payment_method_types_include": [
+            "us_visa_card", 
+            "us_mastercard_card"
+        ]
     }
 
 def create_wallet_payload(first_name, last_name, email):

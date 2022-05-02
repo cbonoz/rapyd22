@@ -69,6 +69,11 @@ export const renderCheckoutPage = (checkoutId) => {
         page_type: "collection"
              // Default is "collection". Optional.
     });
+    try {
+        checkout.closeCheckout();
+    } catch (e) {
+        // checkout closed
+    }
     checkout.displayCheckout();
 
 }

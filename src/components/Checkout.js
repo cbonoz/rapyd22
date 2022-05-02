@@ -61,15 +61,21 @@ function Checkout({user}) {
     }
 
     useEffect(() => {
-        if (category) {
-            renderCheckout()
-        }
-
-    }, [category])
+        // if (category) {
+        renderCheckout()
+        // }
+    }, [])
   return (
     <div>
         <Row>
             <Col span={16}>
+                <h1 className='green'>Complete checkout</h1>
+
+  <div id="rapyd-checkout"></div>
+
+</Col>
+<Col span={8} className='boxed'>
+<p>Purchase category:</p>
           <Select
     showSearch
     style={{ width: 200 }}
@@ -89,10 +95,6 @@ function Checkout({user}) {
       })}
   </Select>
 
-  <div id="rapyd-checkout"></div>
-
-</Col>
-<Col span={8} className='boxed'>
     <BestCard user={user} category={category}/>
 </Col>
 
