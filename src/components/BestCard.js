@@ -65,7 +65,7 @@ function BestCard({user, category}) {
             <b>Rewards {(c.rewards[category] || c.rewards['all'] || {}).percentage || 0}% on {category}</b>
             &nbsp;
             {useAll && <span>
-              {c.missing_card ? <a href={c.link} target="_blank">Apply here</a> : 'You have this card'}</span>}
+              {c.missing_card ? <a href={c.link} target="_blank">Apply here</a> : <span>You have this card</span>}</span>}
             </p>
           </div>
           </div>

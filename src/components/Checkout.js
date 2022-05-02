@@ -69,14 +69,7 @@ function Checkout({user}) {
     <div>
         <Row>
             <Col span={16}>
-                <h1 className='green'>Complete checkout</h1>
-
-  <div id="rapyd-checkout"></div>
-
-</Col>
-<Col span={8} className='boxed'>
-<p>Purchase category:</p>
-          <Select
+                          <Select
     showSearch
     style={{ width: 200 }}
     placeholder="Search to Select"
@@ -94,6 +87,13 @@ function Checkout({user}) {
           return <Option key={c} value={c}>{c}</Option>
       })}
   </Select>
+
+                {/* <h1 className='green'>Complete checkout</h1> */}
+
+  <div id="rapyd-checkout"></div>
+
+</Col>
+<Col span={8} className='boxed'>
 
     <BestCard user={user} category={category}/>
 </Col>
