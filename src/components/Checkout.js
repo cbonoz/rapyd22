@@ -53,7 +53,7 @@ function Checkout({user}) {
         try {
             const {data} = await postCheckout(body)
             console.log('checkout', data)
-            renderCheckoutPage(data.id)
+            renderCheckoutPage(data.data.id)
         } catch (e) {
             console.error(e) 
         }

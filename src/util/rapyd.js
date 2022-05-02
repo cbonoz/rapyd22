@@ -50,6 +50,7 @@ export const renderSaveCardPage = (cardPageId) => {
 
 // https://docs.rapyd.net/build-with-rapyd/docs/hosted-checkout-page-integration-steps
 export const renderCheckoutPage = (checkoutId) => {
+    console.log('render', checkoutId)
     let checkout = new window.RapydCheckoutToolkit({
         pay_button_text: "Buy now",
               // Text that appears on the 'Pay' button. 

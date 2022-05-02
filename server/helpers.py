@@ -20,7 +20,7 @@ def check_keys_in_object(keys, obj):
 def create_checkout_payload():
     return {
         "amount": 100,
-        "complete_checkout_url": "http://localhost:3000/checkout",
+        "complete_checkout_url": "https://hackthegalaxy.devpost.com/",
         # "country": "US",
         # "currency": "USD",  
         "country": "US",
