@@ -1,5 +1,5 @@
 import React from "react";
-import { APP_DESC, APP_NAME, BASE_URL, EXAMPLE_RECOMMENDED_CARDS } from "../util/constants";
+import { APP_DESC, APP_NAME, BASE_URL, CARD_ROUTE_DESCRIPTION, EXAMPLE_RECOMMENDED_CARDS } from "../util/constants";
 import logo from "../assets/logo.png";
 import { useNavigate } from "react-router-dom";
 import { Button } from "antd";
@@ -17,11 +17,11 @@ function Docs(props) {
       {/* <b>API Documentation</b><br/> */}
       <ApiDoc
         title={"Get recommended card"}
-        description={"Returns a recommended card based on the user's provided cards and the category of purchase."}
+        description={CARD_ROUTE_DESCRIPTION}
         route={`${BASE_URL}/cards/recommend`}
         request={`{
           "category": str, // category of the given purchase.
-          "cards": Optional[str] // list of supported cards. If blank, all available cards will be used.
+          "cards": Optional[list[str]] // list of supported cards. If blank, all available cards will be used.
 }`
         }
         response={EXAMPLE_RECOMMENDED_CARDS}

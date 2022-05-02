@@ -4,20 +4,22 @@ import logo from "../assets/logo.png";
 import { useNavigate } from "react-router-dom";
 import { Button, Select, Spin } from "antd";
 import Input from "antd/lib/input/Input";
-import { getCards, postCustomer } from "../api";
+import { getCards, patchUser, postCustomer } from "../api";
 
 const { Option } = Select;
 
 function Register({setUser, user}) {
   const navigate = useNavigate()
-  const [email ,setEmail] = useState()
+  const [email ,setEmail] = useState(user && user.email)
   const [allCards, setAllCards] = useState()
+  const [cards, setCards] = useState([])
   const [error, setError] = useState()
   const [name ,setName] = useState()
   const [loading, setLoading] = useState(false)
 
   const postUser = async () => {
     setError('')
+    setLoading(true)
     console.log('fetchUser', email)
     try {
       const response = await postCustomer({email, name})
@@ -28,6 +30,8 @@ function Register({setUser, user}) {
       const err =  e.response.data.detail
       console.error('e', err)
       setError(err)
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -38,6 +42,22 @@ function Register({setUser, user}) {
     } catch (e) {
       console.error(e)
     }
+  }
+
+  async function patchCards() {
+    const body = {
+      cards,
+      email: user['email']
+    }
+    setLoading(true)
+    try {
+      const {data} = await patchUser(body)
+    } catch (e) {
+      console.error(e)
+    } finally {
+      setLoading(false)
+    }
+    
   }
 
   useEffect(() => {
@@ -60,6 +80,7 @@ function Register({setUser, user}) {
         })
 
         getAllCards()
+        setCards(user.cards || [])
       }
 
      
@@ -96,18 +117,20 @@ function Register({setUser, user}) {
       allowClear
       style={{ width: '400px' }}
       placeholder="Please select"
-      defaultValue={[]}
-      onChange={() => {}}
+      defaultValue={cards}
+      value={cards}
+      onChange={(c) => setCards(c)}
     >
       {allCards.map(c => {
         return <Option key={c}>{c}</Option>
       })}
     </Select>
     <br/>
+    {user.ewallet && <div>Wallet ID: {user.ewallet}</div>}
     <br/>
-    <Button type={'primary'} onClick={() => {}}>Save</Button>
+    <Button type={'primary'} disabled={loading} onClick={patchCards}>Save</Button>
     &nbsp;
-    <Button type={'secondary'} onClick={() => navigate('/checkout')}>Go to checkout</Button>
+    <Button type={'secondary'} disabled={loading} onClick={() => navigate('/checkout')}>Go to checkout</Button>
 
 
     {/* {user && <span>{JSON.stringify(user)}</span>} */}

@@ -4,6 +4,7 @@ from typing import Optional
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from tinydb import Query, TinyDB
+from tinydb.operations import set
 
 from rapyd import make_request
 from card_map import get_cards, get_categories, get_best_cards
@@ -29,7 +30,7 @@ def read_root():
     return {"Hello": "World"}
 
 @app.get("/cards")
-def cards():
+def fetch_cards():
     return get_cards()
 
 @app.get("/categories")
@@ -116,6 +117,14 @@ def post_customer(data: dict):
     user_table.insert(data)
     return data
 
+@app.patch("/cards")
+def patch_cards(data: dict):
+    print('patch', data)
+    check_keys_in_object(['cards', 'email'], data)
+    email = data['email']
+    user_table.update(set('cards', data['cards']), Query()['email'] == email)
+    return _find_customer(email)
+
 @app.get("/customer")
 def get_customer_by_email(data: dict):
     user = _find_customer(data['email'])
@@ -128,12 +137,16 @@ def get_customer_by_email(data: dict):
 
 @app.post("/cards/recommend")
 def recommend_payment_method(data: dict):
-    if 'email' in data:
-        user = _find_customer(data['email'])
+    email = data.get('email', None)
+    if email:
+        user = _find_customer(email)
         if not user:
             raise NOT_FOUND
+        cards = user.get('cards', None)
+    else:
+        cards = None 
 
-    return get_best_cards(data['category'], 1000, data.get('cards', None))
+    return get_best_cards(data['category'], 1000, cards, data.get('use_all', True))
 
 @app.get("/save-card")
 def save_card_page(data: dict):

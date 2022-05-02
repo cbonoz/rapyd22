@@ -318,13 +318,19 @@ def get_categories():
     return set(categories)
 
 
-def get_best_cards(category, amount=None, supported_cards=None, limit=3):
+def get_best_cards(category, amount=None, supported_cards=None, use_all=True, limit=3):
+    print('get_best_cards', category, amount, supported_cards, use_all)
     # category: Active category of purchase
     # amount: reward limit on card
     # supported_cards: restricted list of cards based on the current user.
-    cards = CARD_MAP['cards']
+    cards = CARD_MAP['cards'].copy()
+
     if supported_cards:
-        cards = [c for c in cards if cards['name'] in supported_cards]
+        for c in cards:
+            c['missing_card'] = c['name'] not in supported_cards
+        if not use_all:
+            # Reduce list.
+            cards = [c for c in cards if c['name'] in supported_cards]
 
     # Sort the best card(s) to use based on the provided category.
     sorted_cards = sorted(cards, key=lambda c: _get_best_percentage(category, c), reverse=True)

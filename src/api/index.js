@@ -16,6 +16,10 @@ export const getCategories = (body) => {
     return axiosInstance.get('/categories')
 }
 
+export const patchUser = (body) => {
+    return axiosInstance.patch('/cards', body)
+}
+
 export const postCheckout = (body) => {
     return axiosInstance.post('/checkout', body)
 

@@ -9,6 +9,7 @@ import { renderCheckoutPage } from '../util/rapyd';
 const { Option } = Select;
 
 function Checkout({user}) {
+    console.log('checkout', user)
     const [categories, setCategories] = useState([])
     const [category, setCategory] = useState()
 

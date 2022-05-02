@@ -17,6 +17,10 @@ Use rapyd to create and administer isolated banking information for each of your
 
 ### Concept
 
+There's all sorts of websites that let you compare credit card rewards.
+
+RapydRewards recommends the cards at the point of checkout whenever a client is using a Rapyd checkout screen. This could also link 
+
 <b>Note this project is currently a prototype and would require additional work to be production ready</b>
 
 

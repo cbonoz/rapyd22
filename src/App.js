@@ -4,7 +4,6 @@ import { APP_NAME } from "./util/constants";
 import { Routes, Route, Link, Router } from "react-router-dom";
 import About from "./components/About";
 import Register from "./components/Register";
-import BestCard from "./components/BestCard";
 
 import logo from "./assets/logo.png";
 import "antd/dist/antd.min.css";
@@ -29,9 +28,9 @@ function App() {
             {!user && <Link to="/">
               <Menu.Item key="1">Get Started</Menu.Item>
             </Link>}
-            {/* <Link to="/register">
-              <Menu.Item key="2">Register</Menu.Item>
-            </Link> */}
+            <Link to="/register">
+              <Menu.Item key="2">Manage cards</Menu.Item>
+            </Link>
             <Link to="/checkout">
               <Menu.Item key="3">Smart Checkout</Menu.Item>
             </Link>
@@ -46,7 +45,7 @@ function App() {
             <Routes>
               <Route exact path="/" element={<About/>}/>
               <Route exact path="/register" element={<Register setUser={setUser} user={user}/>} />
-              <Route exact path="/checkout" element={<Checkout />} />
+              <Route exact path="/checkout" element={<Checkout user={user} />} />
               <Route exact path="/api" element={<Docs />} />
             </Routes>
           </div>
