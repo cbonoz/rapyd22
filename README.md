@@ -19,10 +19,17 @@ Use rapyd to create and administer isolated banking information for each of your
 
 There's all sorts of websites that let you compare credit card rewards.
 
-RapydRewards recommends the cards at the point of checkout whenever a client is using a Rapyd checkout screen. This could also link 
+RapydRewards recommends the cards at the point of checkout whenever a client is using a Rapyd checkout screen.
 
 <b>Note this project is currently a prototype and would require additional work to be production ready</b>
 
+### Objective
+
+RapydRewards aims to improve the checkout experience for credit card rewards users by providing tools for selecting the best credit card available to the user at the point of purchase as well as recommending other credit cards that provide higher reward rates.
+
+### How It Works
+
+The prototype application includes a set of some of the most popular credit cards with rewards details including limits and durations for each. A user can select each card owned, which is saved to a user profile. When making a purchase using RapydReward checkout experience, the user is shown which of their available credit cards provides the highest value reward based on the merchant category the purchase falls under.
 
 ### Running the project
 
