@@ -5,15 +5,16 @@
 RapydRewards
 ---
 
-Personalized card recommendations powered by Rapyd.
+A personalized card recommendation embed powered by Rapyd.
 
 <!--
-Introduce other payment apps (explain limitations).
-Use rapyd to create and administer isolated banking information for each of your employees
-* https://www.mockaroo.com/ for data
-
-
 -->
+
+Built for the Rapyd hack the galaxy 2022 hackathon.
+
+Going after the following categories:
+* Digital ads: Credit card companies can embed their card based on the category of purchase the user is completing.
+* Product experience: A high reward or cash back from a particular merchant could incentivize the user to complete a purchase of an item they would otherwise not make.
 
 ### Concept
 
@@ -29,7 +30,9 @@ RapydRewards aims to improve the checkout experience for credit card rewards use
 
 ### How It Works
 
-The prototype application includes a set of some of the most popular credit cards with rewards details including limits and durations for each. A user can select each card owned, which is saved to a user profile. When making a purchase using the RapydReward checkout experience, the user is shown which of their available credit cards provides the highest value reward based on the merchant category the purchase falls under.
+The prototype application includes a set of some of the most popular credit cards with rewards details including limits and durations for each. A user can select each card owned, which is saved to a user profile. When making a purchase using the RapydReward checkout experience, the user is shown which of their available credit cards provides the highest value reward based on the particular merchant category the purchase falls under.
+
+The merchant category selection shown in the app is for demo purposes, the user or merchant of RapydRewards should wire in the appropriate category closest matching one from the `/categories` endpoint.
 
 ### How it's built
 
