@@ -29,7 +29,11 @@ RapydRewards aims to improve the checkout experience for credit card rewards use
 
 ### How It Works
 
-The prototype application includes a set of some of the most popular credit cards with rewards details including limits and durations for each. A user can select each card owned, which is saved to a user profile. When making a purchase using RapydReward checkout experience, the user is shown which of their available credit cards provides the highest value reward based on the merchant category the purchase falls under.
+The prototype application includes a set of some of the most popular credit cards with rewards details including limits and durations for each. A user can select each card owned, which is saved to a user profile. When making a purchase using the RapydReward checkout experience, the user is shown which of their available credit cards provides the highest value reward based on the merchant category the purchase falls under.
+
+### How it's built
+
+The project features a React.js front-end, which includes components that can be inported into a merchant's web application and connects to a python server that includes functionality for storing and managing a a set of user owned credit cards and selecting the best card given details of a purchase. It connects to a users existing Rapyd profile to with stored payment methods.
 
 ### Running the project
 
