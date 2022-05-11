@@ -5,22 +5,23 @@
 RapydRewards
 ---
 
-A personalized card recommendation embed powered by Rapyd.
+A personalized card recommendation embed powered by Rapyd. 
 
-<!--
--->
+RapydRewards helps users make the most of their purchases online by recommending the best card to use at the point of sale.
+
+
 
 Built for the Rapyd hack the galaxy 2022 hackathon.
-
-Going after the following categories:
-* Digital ads: Credit card companies can embed their card based on the category of purchase the user is completing.
-* Product experience: A high reward or cash back from a particular merchant could incentivize the user to complete a purchase of an item they would otherwise not make.
 
 ### Concept
 
 There's all sorts of websites that let you compare credit card rewards.
 
 RapydRewards recommends the cards at the point of checkout whenever a client is using a Rapyd checkout screen.
+
+Going after the following categories:
+* Digital ads: Credit card companies can embed their card signup based on the category of purchase the user is completing.
+* Product experience: A high reward or cash back from a particular card merchant could incentivize the user to complete a purchase of an item.
 
 <b>Note this project is currently a prototype and would require additional work to be production ready</b>
 
