@@ -31,7 +31,7 @@ CARD_MAP = {
 			"image": "https://cdn.prodstatic.com/shared/images/cards/336x211/cc2541a0-801e-11eb-84e8-4d1313fc3187.jpg?auto=webp&fit=crop&quality=90",
 			"details": "",
 			"rewards": {
-				"category": {
+				"restaurant": {
 					"percentage": 3,
 					"limit": 2500,
 					"duration": "quarter"
@@ -46,8 +46,8 @@ CARD_MAP = {
 					"limit": 2500,
 					"duration": "quarter"
 				},
-				"wholesale": {
-					"all": 1
+				"all": {
+					"percentage": 1
 				}
 			}
 		},
@@ -151,7 +151,7 @@ CARD_MAP = {
 			"link": "https://citicards.citi.com/usc/LPACA/Citi/Cards/CustomCash/External_HC2/index.html",
 			"image": "https://cdn.prodstatic.com/shared/images/cards/336x211/9aedd300-bfe7-11eb-a48f-65ac0bb53c5b.png?auto=webp&fit=crop&quality=90",
 			"rewards": {
-				"category": {
+				"restaurant": {
 					"percentage": 5,
 					"limit": 500,
 					"duration": "month"
@@ -267,7 +267,7 @@ CARD_MAP = {
 			"image": "https://cdn.prodstatic.com/shared/images/cards/336x211/a1490b70-afab-11ec-81f6-95945bae99c9.jpg?auto=webp&fit=crop&quality=90",
 			"details": "https://applications.usbank.com/oad/termsSimpleApply.controller?locationCode=8069&offerId=G6PHR4DV11&sourceCode=43678",
 			"rewards": {
-				"category": {
+				"restaurant": {
 					"percentage": 5,
 					"limit": 2000,
 					"duration": "year"
