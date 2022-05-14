@@ -1,8 +1,6 @@
 from fastapi import HTTPException
 import os
 
-from more_itertools import first
-
 
 def require_env(key):
     val = os.getenv(key)

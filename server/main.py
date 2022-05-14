@@ -1,6 +1,3 @@
-from string import capwords
-from typing import Optional
-
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from tinydb import Query, TinyDB
