@@ -67,6 +67,8 @@ RapydRewards embed (showing best results based on the current user's owned cards
 <img src="./img/my_cards.png" width=800/>
 RapydRewards embed (showing best results based on all cards)
 <img src="./img/all_cards.png" width=800/>
+Registering the checkout flow.
+<img src="./img/api.png" width=800/>
 RapydRewards API spec
 <img src="./img/docs.png" width=800/>
 
