@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import { APP_DESC, APP_NAME } from "../util/constants";
 import logo from "../assets/logo.png";
 import { useNavigate } from "react-router-dom";
-import { Button, Select, Spin } from "antd";
+import { Button, Select, Spin, notification, Space } from "antd";
 import Input from "antd/lib/input/Input";
 import { getCards, patchUser, postCustomer } from "../api";
 
@@ -16,6 +16,14 @@ function Register({setUser, user}) {
   const [error, setError] = useState()
   const [name ,setName] = useState()
   const [loading, setLoading] = useState(false)
+
+  const openNotificationWithIcon = (type, message, description) => {
+    notification[type]({
+      message,
+      description,
+    });
+  };
+  
 
   const postUser = async () => {
     setError('')
@@ -52,6 +60,7 @@ function Register({setUser, user}) {
     setLoading(true)
     try {
       const {data} = await patchUser(body)
+      openNotificationWithIcon('success', 'Success!', 'Your credit cards have been updated.')
     } catch (e) {
       console.error(e)
     } finally {
@@ -86,7 +95,9 @@ function Register({setUser, user}) {
      
       // TODO: remove listener on exit.
   }, [user])
-  
+
+
+
 
   if (!email || !user) {
     return <>
@@ -110,8 +121,8 @@ function Register({setUser, user}) {
 
   return (
     <>
-    <h1>Found cards</h1>
-    <p>Select the cards you would like to filter on with {APP_NAME}. If no cards are selected, all available cards will be used.</p>
+    <h1>Select cards</h1>
+    <p>Select the cards you would like to use with {APP_NAME}. If no cards are selected, all available cards will be used for determining the best rewards.</p>
     <Select
       mode="multiple"
       allowClear
@@ -128,7 +139,7 @@ function Register({setUser, user}) {
     <br/>
     {user.ewallet && <div>Wallet ID: {user.ewallet}</div>}
     <br/>
-    <Button type={'primary'} disabled={loading} onClick={patchCards}>Save</Button>
+    <Button type={'primary'} disabled={loading} loading={loading} onClick={patchCards}>Save</Button>
     &nbsp;
     <Button type={'secondary'} disabled={loading} onClick={() => navigate('/checkout')}>Go to checkout</Button>
 

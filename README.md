@@ -9,8 +9,6 @@ A personalized card recommendation embed powered by Rapyd.
 
 RapydRewards helps users make the most of their purchases online by recommending the best card to use at the point of sale.
 
-
-
 Built for the Rapyd hack the galaxy 2022 hackathon.
 
 ### Concept
@@ -56,6 +54,21 @@ Run the server code from the below directory:
     pip install -r requirements.txt
     ./run.sh
 </pre>
+
+### Screenshots
+
+Home page of app
+<img src="./img/home.png" width=800/>
+Adding cards to your user profile
+<img src="./img/add.png" width=800/>
+Active cards
+<img src="./img/selected.png" width=800/>
+RapydRewards embed (showing best results based on the current user's owned cards)
+<img src="./img/my_cards.png" width=800/>
+RapydRewards embed (showing best results based on all cards)
+<img src="./img/all_cards.png" width=800/>
+RapydRewards API spec
+<img src="./img/docs.png" width=800/>
 
 ### Useful links
 https://docs.rapyd.net/build-with-rapyd/reference/rapyd-disburse-overview
