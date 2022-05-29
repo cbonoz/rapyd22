@@ -9,7 +9,7 @@ A personalized card recommendation embed powered by Rapyd.
 
 RapydRewards helps users make the most of their purchases online by recommending the best card to use at the point of sale.
 
-Built for the Rapyd hack the galaxy 2022 hackathon.
+Built for the Rapyd Hack the Galaxy 2022 hackathon.
 
 ### Concept
 
@@ -33,6 +33,8 @@ The prototype application includes a set of some of the most popular credit card
 
 The merchant category selection shown in the app is for demo purposes, the user or merchant of RapydRewards should wire in the appropriate category closest matching one from the `/categories` endpoint.
 
+The RapydRewards project is a side panel next to the Rapyd checkout to deliver a checkout experience that enables the user to discover the best cards, either the ones that the person currently owns or the ones that they don't, to use for their purchase.
+
 ### How it's built
 
 The project features a React.js front-end, which includes components that can be inported into a merchant's web application and connects to a python server that includes functionality for storing and managing a a set of user owned credit cards and selecting the best card given details of a purchase. It connects to a users existing Rapyd profile to with stored payment methods.
@@ -42,8 +44,10 @@ The project features a React.js front-end, which includes components that can be
 From the repo root:
 `yarn; yarn start`
 
-Run the server code from the below directory:
-`./server`:
+Install the necessary backend dependencies (from requirements.txt) and run the server code from the below directory:
+`./server`
+
+The server code stores card profiles per email address.
 
 <pre>
     RAPYD_ACCESS_KEY={YOUR RAPYD ACCESS KEY}
