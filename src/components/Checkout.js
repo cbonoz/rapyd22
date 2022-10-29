@@ -1,9 +1,8 @@
 import React, {useState, useEffect} from 'react'
-import PropTypes from 'prop-types'
-import BestCard from './BestCard'
 import { getCategories, postCheckout } from '../api'
-import { Row, Col, Divider, Select } from 'antd';
+import { Row, Col, Select } from 'antd';
 import { renderCheckoutPage } from '../util/rapyd';
+import BestCards from './BestCards';
 
 
 const { Option } = Select;
@@ -93,9 +92,8 @@ function Checkout({user}) {
   <div id="rapyd-checkout"></div>
 
 </Col>
-<Col span={8} className='boxed'>
-
-    <BestCard user={user} category={category}/>
+<Col span={8}>
+    <BestCards user={user} category={category}/>
 </Col>
 
     </Row>

@@ -2,13 +2,13 @@ import React, {useState, useEffect} from "react";
 import { APP_DESC, APP_NAME } from "../util/constants";
 import logo from "../assets/logo.png";
 import { useNavigate } from "react-router-dom";
-import { Button, Spin } from "antd";
+import { Button, Card, Spin } from "antd";
 import { getBestCard } from "../api";
 import { Switch } from 'antd';
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
 import powered from '../assets/powered.png'
 
-function BestCard({user, category}) {
+function BestCards({user, category}) {
   const navigate = useNavigate()
   const [useAll, setUseAll] = useState(false)
   const [loading, setLoading] = useState()
@@ -52,10 +52,7 @@ function BestCard({user, category}) {
   }
   
   return (
-    <div className="container">
-      {/* <Button loading={loading} disabled={loading} type="primary" onClick={recommend}>Recommend Card</Button> */}
-      {/* {result && <span>{JSON.stringify(result)}</span>} */}
-      <div><h3 className="green">{(useAll || !user) ? 'All' : 'Your best'} cards:</h3>
+      <Card title={<div className="green-bg">{(useAll || !user) ? 'Best' : 'Your best'} cards:</div>}>
 
       {result.map((c, i) => {
         return <div key={i}>
@@ -65,7 +62,7 @@ function BestCard({user, category}) {
             <b>Rewards {(c.rewards[category] || c.rewards['all'] || {}).percentage || 0}% on {category}</b>
             &nbsp;
             {useAll && <span>
-              {c.missing_card ? <a href={c.link} target="_blank">Apply here</a> : <span>You have this card</span>}</span>}
+              {c.missing_card ? <a href={c.link} target="_blank">Apply here</a> : <span className="green">You own this card</span>}</span>}
             </p>
           </div>
           </div>
@@ -73,13 +70,11 @@ function BestCard({user, category}) {
         <br/>
         {user && <div>Show all cards <Switch defaultChecked={useAll} onChange={(c) => setUseAll(c)} checked={useAll}></Switch></div>}
         <br/>
-
-      <img src={powered} style={{width: '125px'}}
+      <img src={powered} style={{width: '140px'}}
       />
-      </div>
+    </Card>
 
-    </div>
   );
 }
 
-export default BestCard;
+export default BestCards;
