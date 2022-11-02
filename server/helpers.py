@@ -19,14 +19,10 @@ def create_checkout_payload():
     return {
         "amount": 100,
         "complete_checkout_url": "https://hackthegalaxy.devpost.com/",
-        # "country": "US",
-        # "currency": "USD",  
         "country": "US",
         "currency": "USD",
         "requested_currency": "USD",
         "payment_method_types_include": [
-            "us_visa_card", 
-            "us_mastercard_card"
         ]
     }
 

@@ -90,6 +90,9 @@ function Checkout({user}) {
                 {/* <h1 className='green'>Complete checkout</h1> */}
 
   <div id="rapyd-checkout"></div>
+  <p></p>
+  <p></p>
+  <p style={{'fontWeight': 500, 'marginTop': '25px'}}>Add checkout experience here</p>
 
 </Col>
 <Col span={8}>

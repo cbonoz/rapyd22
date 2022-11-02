@@ -63,8 +63,8 @@
 }
 
 .ant-card-head {
-  background: #208220;
-  color: white;
+  color: #208220;
+  /* color: white; */
 }
 
 .ant-card {
