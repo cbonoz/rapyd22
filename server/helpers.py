@@ -23,6 +23,9 @@ def create_checkout_payload():
         "currency": "USD",
         "requested_currency": "USD",
         "payment_method_types_include": [
+            "us_debit_visa_card",
+            "us_debit_mastercard_card",
+            "us_debit_discover_card"
         ]
     }
 
